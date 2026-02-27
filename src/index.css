@@ -1,0 +1,55 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #0f0f15;
+  --surface: #16161f;
+  --card-bg: #1c1c28;
+  --border: #2a2a38;
+  --hover: rgba(255, 255, 255, 0.05);
+  --accent: #e50914;
+  --badge-bg: rgba(229, 9, 20, 0.12);
+  --text-primary: #f0f0f5;
+  --text-secondary: #8888a0;
+  --input-bg: #1c1c28;
+  --star-full: #f5c518;
+  --star-empty: #3a3a50;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+}

@@ -1,0 +1,28 @@
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.full {
+  color: var(--star-full);
+  font-size: 16px;
+}
+
+.half {
+  color: var(--star-full);
+  font-size: 16px;
+  opacity: 0.6;
+}
+
+.empty {
+  color: var(--star-empty);
+  font-size: 16px;
+}
+
+.score {
+  margin-left: 6px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
