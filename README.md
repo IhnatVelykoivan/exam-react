@@ -1,4 +1,4 @@
-# Movies App
+# Frontend React.js Control Work (Movies App)
 
 A React application for browsing movies using the [TMDB API](https://www.themoviedb.org/).
 
