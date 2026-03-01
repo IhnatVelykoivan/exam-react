@@ -4,10 +4,10 @@ A React application for browsing movies using the [TMDB API](https://www.themovi
 
 ## Tech Stack
 
-- **React 18** — functional components, hooks
+- **React 19** — functional components, hooks
 - **TypeScript** — strict typing
-- **Redux Toolkit** — global state management
-- **React Router v6** — client-side routing
+- **Redux Toolkit** — global state management (`createSlice`, `createAsyncThunk`)
+- **React Router v7** — client-side routing
 - **CSS Modules** — scoped styling
 - **Vite** — build tool
 
@@ -16,11 +16,11 @@ A React application for browsing movies using the [TMDB API](https://www.themovi
 - Browse movies from TMDB (`/discover/movie`)
 - Filter movies by genre (sidebar)
 - Search movies by title with debounce
-- Pagination
-- Movie detail page — poster, tagline, rating, genres, overview
+- Pagination (up to 500 pages, TMDB limit)
+- Movie detail page — poster, backdrop, tagline, rating, genres, overview
 - Star rating component (`vote_average / 2` → out of 5 stars)
 - Poster placeholder for movies without images
-- UserInfo component (hardcoded avatar + name)
+- UserInfo component (avatar + name)
 
 ## Getting Started
 
@@ -39,7 +39,13 @@ npm install
 
 ### 3. Set up environment variables
 
-Create a `.env` file in the root of the project:
+Copy the example file and fill in your token:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env`:
 
 ```
 VITE_TMDB_TOKEN=your_bearer_token_here
@@ -66,25 +72,26 @@ npm run build
 ```
 src/
 ├── api/
-│   └── tmdb.ts              # TMDB API calls
+│   └── tmdb.ts              # TMDB API calls (fetch + error handling)
 ├── components/
-│   ├── Header/              # Search bar
+│   ├── Header/              # Search bar with debounce
 │   ├── MoviesList/          # Grid of movie cards
-│   ├── MoviesListCard/      # Single movie card
-│   ├── PosterPreview/       # Movie poster image
+│   ├── MoviesListCard/      # Single movie card (link to detail)
+│   ├── PosterPreview/       # Movie poster with fallback placeholder
 │   ├── StarsRating/         # Star rating (out of 5)
-│   ├── MovieInfo/           # Title, description, badges
+│   ├── MovieInfo/           # Title, year, genres, overview
 │   ├── GenreBadge/          # Genre tag
 │   └── UserInfo/            # User avatar and name
 ├── pages/
-│   ├── MoviesPage/          # Home page — list + genre sidebar
+│   ├── MoviesPage/          # Home page — list + genre sidebar + pagination
 │   └── MovieDetailPage/     # Movie detail page
 ├── store/
-│   ├── index.ts
+│   ├── index.ts             # Store configuration + RootState / AppDispatch types
+│   ├── hooks.ts             # Typed useAppDispatch and useAppSelector hooks
 │   ├── moviesSlice.ts       # Movies, pagination, search, genre filter
 │   └── genresSlice.ts       # Genres list
 ├── types/
-│   └── index.ts             # TypeScript interfaces
+│   └── index.ts             # TypeScript interfaces (Movie, Genre, etc.)
 ├── App.tsx
 └── main.tsx
 ```

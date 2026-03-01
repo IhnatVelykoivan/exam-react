@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import type { Genre, Movie } from '../../types'
 import MovieInfo from '../MovieInfo/MovieInfo'
 import PosterPreview from '../PosterPreview/PosterPreview'
@@ -10,15 +10,8 @@ interface Props {
 }
 
 function MoviesListCard({ movie, genres }: Props) {
-  const navigate = useNavigate()
-
-  function handleClick() {
-    navigate(`/movie/${movie.id}`)
-  }
-
   return (
-    <article className={styles.card} onClick={handleClick} role="button" tabIndex={0}
-      onKeyDown={(e) => e.key === 'Enter' && handleClick()}>
+    <Link to={`/movie/${movie.id}`} className={styles.card}>
       <PosterPreview posterPath={movie.poster_path} title={movie.title} />
       <MovieInfo
         title={movie.title}
@@ -28,7 +21,7 @@ function MoviesListCard({ movie, genres }: Props) {
         genreIds={movie.genre_ids}
         genres={genres}
       />
-    </article>
+    </Link>
   )
 }
 

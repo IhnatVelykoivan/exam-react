@@ -73,7 +73,7 @@ function MovieDetailPage() {
               alt={movie.title}
               className={styles.poster}
               onError={(e) => {
-                e.currentTarget.src = 'https://via.placeholder.com/500x750/1a1a2e/e0e0e0?text=No+Poster'
+                e.currentTarget.src = '/placeholder.png'
               }}
             />
           </div>

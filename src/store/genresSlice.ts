@@ -30,6 +30,7 @@ const genresSlice = createSlice({
     builder
       .addCase(loadGenres.pending, state => {
         state.isLoading = true
+        state.error = null
       })
       .addCase(loadGenres.fulfilled, (state, action) => {
         state.isLoading = false

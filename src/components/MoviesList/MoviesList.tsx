@@ -1,11 +1,10 @@
-import { useSelector } from 'react-redux'
-import type { RootState } from '../../store'
+import { useAppSelector } from '../../store/hooks'
 import MoviesListCard from '../MoviesListCard/MoviesListCard'
 import styles from './MoviesList.module.css'
 
 function MoviesList() {
-  const { items, isLoading, error } = useSelector((state: RootState) => state.movies)
-  const genres = useSelector((state: RootState) => state.genres.items)
+  const { items, isLoading, error } = useAppSelector((state) => state.movies)
+  const genres = useAppSelector((state) => state.genres.items)
 
   if (isLoading) {
     return (

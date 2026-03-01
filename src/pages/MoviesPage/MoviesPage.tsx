@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import type { AppDispatch, RootState } from '../../store'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
 import { loadGenres } from '../../store/genresSlice'
 import { loadMovies, setGenre, setPage } from '../../store/moviesSlice'
 import MoviesList from '../../components/MoviesList/MoviesList'
@@ -8,25 +7,26 @@ import UserInfo from '../../components/UserInfo/UserInfo'
 import styles from './MoviesPage.module.css'
 
 function MoviesPage() {
-  const dispatch = useDispatch<AppDispatch>()
-  const genres = useSelector((state: RootState) => state.genres.items)
-  const { currentPage, totalPages, selectedGenreId } = useSelector(
-    (state: RootState) => state.movies
+  const dispatch = useAppDispatch()
+  const genres = useAppSelector((state) => state.genres.items)
+  const { currentPage, totalPages, selectedGenreId, searchQuery } = useAppSelector(
+    (state) => state.movies
   )
 
   useEffect(() => {
     dispatch(loadGenres())
-    dispatch(loadMovies())
   }, [dispatch])
+
+  useEffect(() => {
+    dispatch(loadMovies())
+  }, [currentPage, selectedGenreId, searchQuery, dispatch])
 
   function handleGenreSelect(genreId: number | null) {
     dispatch(setGenre(genreId))
-    dispatch(loadMovies())
   }
 
   function handlePageChange(page: number) {
     dispatch(setPage(page))
-    dispatch(loadMovies())
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 

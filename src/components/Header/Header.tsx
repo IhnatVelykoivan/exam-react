@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import type { AppDispatch, RootState } from '../../store'
-import { setSearchQuery, loadMovies } from '../../store/moviesSlice'
+import { useAppDispatch, useAppSelector } from '../../store/hooks'
+import { setSearchQuery } from '../../store/moviesSlice'
 import styles from './Header.module.css'
 
 function Header() {
-  const dispatch = useDispatch<AppDispatch>()
-  const searchQuery = useSelector((state: RootState) => state.movies.searchQuery)
+  const dispatch = useAppDispatch()
+  const searchQuery = useAppSelector((state) => state.movies.searchQuery)
   const [inputValue, setInputValue] = useState(searchQuery)
 
   // sync local input when Redux searchQuery is cleared externally (e.g. genre selected)
@@ -23,10 +22,6 @@ function Header() {
     }, 500)
     return () => clearTimeout(timer)
   }, [inputValue, dispatch, searchQuery])
-
-  useEffect(() => {
-    dispatch(loadMovies())
-  }, [searchQuery, dispatch])
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setInputValue(e.target.value)
